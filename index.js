@@ -9,6 +9,7 @@ client.commands = new Discord.Collection()
 
 const commandFiles = fs.readdirSync(commandFolder).filter(file => file.endsWith('.js'))
 const bot = require('./src/bot')
+const talkingCup = require('./src/talkingCup')
 
 for (const file of commandFiles) {
           const command = require(`./src/commands/${file}`);
@@ -16,6 +17,7 @@ for (const file of commandFiles) {
           client.commands.set(command.name, command);
           bot.print(`Command ${file} loaded`)
 }
+
 
 var event = {};
 event.ready = require("./src/event/ready")
@@ -29,16 +31,26 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
+
           message.content = message.content.toLowerCase()
+
+          message.content = bot.removeExtraSpacesFrom(message.content)
+
+          message.content = message.content.replace(/\n|\r/g, '');
+
+
+
 
           if (!message.content.startsWith(prefix)) return;
 
-          bot.print(`[ ${message.author.username} ]  : [ ${message.content} ]`)
+          bot.message(message)
 
           var args = message.content.slice(prefix.length).trim().split(/ +/);
           var commandName = args.shift()
 
           if (!commandName) return bot.help(message, client, prefix)
+
+          if (talkingCup.execute(message)) return
 
           const command = client.commands.get(commandName) ||
                     client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
@@ -46,6 +58,8 @@ client.on('message', message => {
           if (!command) return bot.derror(message, "This command doesn't exist !")
 
           if (command.guildOnly && !message.guild) return bot.derror(message, "This command is not available in private message")
+          bot.updateStatus(client)
+
           command.execute(message, args.join(' '))
           return
 
