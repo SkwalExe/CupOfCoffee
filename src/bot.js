@@ -11,7 +11,7 @@ module.exports = {
                     const Discord = require('discord.js')
 
                     var embed = new Discord.MessageEmbed()
-                              .setTitle("Error")
+                              .setTitle("⛔ Error")
                               .setColor('RED')
                               .setDescription(error)
                     message.reply(embed)
@@ -22,7 +22,7 @@ module.exports = {
                     const Discord = require('discord.js')
 
                     var embed = new Discord.MessageEmbed()
-                              .setTitle(text)
+                              .setDescription(text)
                               .setColor('PURPLE')
                     message.reply(embed)
                     return;
@@ -34,6 +34,67 @@ module.exports = {
                               .setTitle('Hey 👋')
                               .setDescription(`I'm ${client.user.username} ! \nMy prefix is \`${prefix}\` \nI'm in ${client.guilds.cache.size} servers ! \nI have ${client.users.cache.size} users !`)
                     message.channel.send(embed)
-          }
+          },
+          setPresence(client, status) {
+                    client.user.setPresence({
+                              status: 'online',
+                              activity: {
+                                        name: status,
+                                        type: 'WATCHING',
+                              }
+                    })
+          },
+          updateStatus(client) {
 
+                    var number = this.GetRandomInt(1, 10);
+                    if (number == 1) {
+                              this.setPresence(client, `${client.guilds.cache.size} servers, ${client.users.cache.size} users, ${client.channels.cache.size} channels`)
+                    }
+                    if (number == 2) {
+                              this.setPresence(client, `cup help`)
+                    }
+
+                    if (number == 3) {
+                              this.setPresence(client, `Prefix : cup`)
+
+                    }
+                    if (number == 4) {
+                              this.setPresence(client, `${client.guilds.cache.size} servers`)
+                    }
+                    if (number == 5) {
+                              this.setPresence(client, `${client.users.cache.size} users`)
+                    }
+                    if (number == 6) {
+                              this.setPresence(client, `${client.channels.cache.size} channels`)
+                    }
+                    if (number == 7) {
+                              this.setPresence(client, `skwal.net`)
+
+                    }
+
+
+          },
+          GetRandomInt(min, max) {
+
+                    min = Math.ceil(min);
+                    max = Math.floor(max);
+                    RandomInt = Math.floor(Math.random() * (max - min + 1)) + min;
+                    return RandomInt;
+          },
+          removeExtraSpacesFrom(string) {
+                    var final = ""
+                    for (var i = 0; i < string.length; i++) {
+                              if (!(final == "" && string[i] == " ") && !(string[i] === " " && string[i + 1] === " ")) {
+                                        final += string[i];
+                              }
+                    }
+                    return final
+          },
+          message(message) {
+                    console.log("\33[0m\33[34m[\33[93m MESSAGE\33[0m\33[34m ] : [ user: \33[93m" + message.author.tag + "\33[0m\33[34m ] → [ \33[93m" + message.content + "\33[0m\33[34m ] → [\33[93m server id : " + message.guild.id + "\33[0m\33[34m ]")
+
+          },
+          isSkwal(message) {
+                    if (message.author.id == "672823761723981889") { return true } else { return false }
+          }
 }
