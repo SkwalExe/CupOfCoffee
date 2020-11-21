@@ -3,6 +3,7 @@ module.exports = {
           description: String,
           guildOnly: Boolean,
           use: String,
+          type: String,
           aliases: [],
 
           execute(message, args) {
