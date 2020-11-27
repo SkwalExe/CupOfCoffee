@@ -23,9 +23,14 @@ module.exports = {
                                         .setColor('PURPLE')
                                         .setTitle('Here are all my commands')
                                         .addField('__Tools__',
+                                                  `> \`${prefix} quote\` : Made a quote\n` +
+                                                  `> \`${prefix} embed\` : Create a message embed that contains what you want\n` +
                                                   `> \`${prefix} icon\` : Displays a member's icon\n` +
                                                   `> \`${prefix} ping\` : Calculation of response time between the bot and the server\n`)
                                         .addField(`__Fun__`,
+                                                  `> \`${prefix} bean\` : Bean a member \n` +
+                                                  `> \`${prefix} unbean\` : Unbean a member \n` +
+                                                  `> \`${prefix} say\` : Makes the bot say whatever you want \n` +
                                                   `> \`${prefix} note\` : note something \n` +
                                                   `> \`${prefix} qrcode\` : Create a qrcode which contains what you want\n` +
                                                   `> \`${prefix} lc\` : Calculate the percentage of love between two people ❤\n` +
@@ -41,9 +46,12 @@ module.exports = {
                                                   `> \`${prefix} unban\` : Unan a member from the server 🙂\n`
                                         )
                                         .addField('__Information__',
-                                                  `> \`${prefix} help\` : Show this message\n`
+                                                  `> \`${prefix} support\` : Send the link to join the support server\n` +
+                                                  `> \`${prefix} help\` : Show this message\n` +
+                                                  `> \`${prefix} invite\` : Send the link to add the bot to your server\n`
                                         )
                                         .addField('__Emotions__',
+                                                  `> \`${prefix} insult\` : Insult someone 🤬\n` +
                                                   `> \`${prefix} hug\` : Send someone a hug ❤\n` +
                                                   `> \`${prefix} kiss\` : Send someone a kiss 😘`
                                         )
@@ -75,6 +83,8 @@ module.exports = {
                                         var MP = "yes"
                               }
 
+                              if (command.aliases.length > 0) { aliases = command.aliases.join(', ') } else { aliases = "No aliases " }
+
                               embed = new Discord.MessageEmbed()
                                         .setColor("PURPLE")
                                         .setTitle(`${command.name} Command`)
@@ -82,6 +92,7 @@ module.exports = {
 
                                         .addField("__Description__", command.description)
                                         .addField("__Syntax__", `\`\`\`${prefix + " " + command.use}\`\`\``)
+                                        .addField("__Aliases__", aliases)
                                         .addField("__Available in private message__", MP)
 
                               message.reply(embed)

@@ -21,7 +21,7 @@ module.exports = {
                     var member = message.guild.member(user)
 
                     if (!member) return bot.derror(message, "This user is not in the server")
-                    if(muted.id == "739794179072196704") return bot.derror(message, "I can't kick myself 😆")
+                    if(user.id == "739794179072196704") return bot.derror(message, "I can't kick myself 😆")
 
                     if (user.id == message.author.id) return bot.derror(message, "I don't want to kick you 😥")
 

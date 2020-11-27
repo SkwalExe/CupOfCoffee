@@ -1,7 +1,7 @@
 const Discord = require('discord.js');
 const fs = require('fs')
-
-const { token, prefix } = require('./src/config.json')
+const token = process.env.TOKEN
+const { prefix } = require('./src/config.json')
 const commandFolder = `./src/commands`
 
 const client = new Discord.Client()
@@ -31,8 +31,19 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
+          if (message.guild)
+                    var beanedrole = message.guild.roles.cache.find(r => r.name == "Beaned")
+          if (beanedrole)
+                    if (message.member)
+                              if (message.member.roles.cache.has(beanedrole.id)) message.react(message.client.emojis.cache.find(emoji => emoji.name === "bean"))
 
-          message.content = message.content.toLowerCase()
+
+
+          var lowercase = message.content.split(' ')
+
+          if (lowercase[0]) lowercase[0] = lowercase[0].toLowerCase()
+          if (lowercase[1]) lowercase[1] = lowercase[1].toLowerCase()
+          message.content = lowercase.join(' ')
 
           message.content = bot.removeExtraSpacesFrom(message.content)
 

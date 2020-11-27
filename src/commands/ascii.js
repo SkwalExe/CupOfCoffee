@@ -14,7 +14,7 @@ module.exports = {
                     if (!args) return bot.derror(message, 'You must specify text ')
 
                     ascii.font(args, "Doom", (err, text) => {
-                              if (text.length > 1000) bot.derror(message, "Too many caracters")
+                              if (text.length > 1000) return bot.derror(message, "Too many caracters")
                               message.channel.send(`\`\`\`${text}\`\`\`-- ${message.author.username}`)
                     })
           }

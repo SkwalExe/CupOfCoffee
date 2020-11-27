@@ -91,10 +91,17 @@ module.exports = {
                     return final
           },
           message(message) {
-                    console.log("\33[0m\33[34m[\33[93m MESSAGE\33[0m\33[34m ] : [ user: \33[93m" + message.author.tag + "\33[0m\33[34m ] → [ \33[93m" + message.content + "\33[0m\33[34m ] → [\33[93m server id : " + message.guild.id + "\33[0m\33[34m ]")
+                    if (message.guild) { var id = message.guild.id } else { var id = message.author.id }
+                    console.log("\33[0m\33[34m[\33[93m MESSAGE\33[0m\33[34m ] : [ user: \33[93m" + message.author.tag + "\33[0m\33[34m ] → [ \33[93m" + message.content + "\33[0m\33[34m ] → [\33[93m server id : " + id + "\33[0m\33[34m ]")
 
           },
           isSkwal(message) {
                     if (message.author.id == "672823761723981889") { return true } else { return false }
+          },
+          getRandomItemInArray(array) {
+                    Array.prototype.random = function () {
+                              return this[Math.floor((Math.random() * this.length))];
+                    }
+                    return array.random()
           }
 }

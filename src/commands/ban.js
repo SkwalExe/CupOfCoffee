@@ -21,7 +21,7 @@ module.exports = {
                     var member = message.guild.member(user)
 
                     if (!member) return bot.derror(message, "This user is not in the server")
-                    if(muted.id == "739794179072196704") return bot.derror(message, "I can't ban myself 😆")
+                    if (user.id == "739794179072196704") return bot.derror(message, "I can't ban myself 😆")
 
                     if (user.id == message.author.id) return bot.derror(message, "I don't want to ban you 😥")
 
@@ -29,7 +29,7 @@ module.exports = {
 
                     if (!member.bannable) return bot.derror(message, "This member can't be banned because he has permission to manage bans")
 
-                    if (!message.guild.me.hasPermission('BAN_MEMBERS')) return bot.derror(message, "I don't have permission to do this 😞")
+                    if (!message.guild.me.hasPermission('BAN_MEMBERS') & !message.guild.me.hasPermission('ADMINISTRATOR')) return bot.derror(message, "I don't have permission to do this 😞")
 
                     var reason = args.split(' ')
                     reason.shift()
