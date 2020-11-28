@@ -28,6 +28,7 @@ module.exports = {
                                                   `> \`${prefix} icon\` : Displays a member's icon\n` +
                                                   `> \`${prefix} ping\` : Calculation of response time between the bot and the server\n`)
                                         .addField(`__Fun__`,
+                                                  `> \`${prefix} meme\` : Send memes that make you laugh so hard 🤣 \n` +
                                                   `> \`${prefix} bean\` : Bean a member \n` +
                                                   `> \`${prefix} unbean\` : Unbean a member \n` +
                                                   `> \`${prefix} say\` : Makes the bot say whatever you want \n` +

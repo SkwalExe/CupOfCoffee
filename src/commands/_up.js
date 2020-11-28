@@ -1,7 +1,7 @@
 module.exports = {
           name: "up",
           description: "Ultra secret command",
-          guildOnly: false,
+          guildOnly: true,
           use: "up secret",
           type: "Secret command",
           aliases: [],
