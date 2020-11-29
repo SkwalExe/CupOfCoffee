@@ -24,8 +24,8 @@ module.exports = {
                     var embed = new Discord.MessageEmbed()
                               .setDescription(text)
                               .setColor('PURPLE')
-                    message.reply(embed)
-                    return;
+
+                    return message.channel.send(embed);
           },
           help(message, client, prefix) {
                     const Discord = require('discord.js')
@@ -103,5 +103,6 @@ module.exports = {
                               return this[Math.floor((Math.random() * this.length))];
                     }
                     return array.random()
-          }
+          },
+
 }

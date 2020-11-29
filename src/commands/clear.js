@@ -10,7 +10,7 @@ module.exports = {
                     const Discord = require('discord.js');
                     const bot = require('../bot');
 
-                    if (!message.member.hasPermission("MANAGE_MESSAGE") & !bot.isSkwal(message)) return bot.derror(message, "Sorry, you don't have permission to do this 😔")
+                    if (!message.member.hasPermission("MANAGE_MESSAGES") & !bot.isSkwal(message)) return bot.derror(message, "Sorry, you don't have permission to do this 😔")
 
                     if (args == "all") {
                               var position = message.channel.position

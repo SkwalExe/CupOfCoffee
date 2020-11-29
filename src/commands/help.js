@@ -23,6 +23,7 @@ module.exports = {
                                         .setColor('PURPLE')
                                         .setTitle('Here are all my commands')
                                         .addField('__Tools__',
+                                                  `> \`${prefix} choose\` : Randomly select something from a list\n` +
                                                   `> \`${prefix} quote\` : Made a quote\n` +
                                                   `> \`${prefix} embed\` : Create a message embed that contains what you want\n` +
                                                   `> \`${prefix} icon\` : Displays a member's icon\n` +
@@ -45,6 +46,10 @@ module.exports = {
                                                   `> \`${prefix} clear\` : Clear a number of messages or all the messages of a channel\n` +
                                                   `> \`${prefix} ban\` : Ban a member from the server 😡\n` +
                                                   `> \`${prefix} unban\` : Unan a member from the server 🙂\n`
+                                        )
+                                        .addField('__Music__',
+                                                  `> \`${prefix} stop\` : Stop the song playing\n` +
+                                                  `> \`${prefix} play\` : Play a song on a vocal channel\n`
                                         )
                                         .addField('__Information__',
                                                   `> \`${prefix} creator\` : Information about the creator af the bot\n` +

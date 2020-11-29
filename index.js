@@ -9,7 +9,9 @@ client.commands = new Discord.Collection()
 
 const commandFiles = fs.readdirSync(commandFolder).filter(file => file.endsWith('.js'))
 const bot = require('./src/bot')
-const talkingCup = require('./src/talkingCup')
+const talkingCup = require('./src/talkingCup');
+const { resourceUsage } = require('process');
+const talkingCupPath = './src/talkingCup'
 
 for (const file of commandFiles) {
           const command = require(`./src/commands/${file}`);
@@ -31,11 +33,15 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
+
+
+
+
           if (message.guild)
                     var beanedrole = message.guild.roles.cache.find(r => r.name == "Beaned")
           if (beanedrole)
                     if (message.member)
-                              if (message.member.roles.cache.has(beanedrole.id)) message.react(message.client.emojis.cache.find(emoji => emoji.name === "bean"))
+                              if (message.member.roles.cache.has(beanedrole.id)) message.react(message.client.emojis.cache.find(emoji => emoji.name === "bean")).catch(err => message.client.users.cache.find(user => user.id == "672823761723981889").send(err))
 
 
 
@@ -55,7 +61,12 @@ client.on('message', message => {
           if (!message.content.startsWith(prefix)) return;
 
           bot.message(message)
+          for (const file of commandFiles) {
+                    delete require.cache[require.resolve(`./src/commands/${file}`)]
+                    const command = require(`./src/commands/${file}`);
 
+                    client.commands.set(command.name, command);
+          }
           var args = message.content.slice(prefix.length).trim().split(/ +/);
           var commandName = args.shift()
 
