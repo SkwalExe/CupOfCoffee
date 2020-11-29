@@ -61,12 +61,14 @@ client.on('message', message => {
 
           if (!commandName) return bot.help(message, client, prefix)
 
-          if (talkingCup.execute(message)) return
 
           const command = client.commands.get(commandName) ||
                     client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
-          if (!command) return bot.derror(message, "This command doesn't exist !")
+          if (!command) {
+                    if (talkingCup.execute(message)) return
+                    return bot.derror(message, "This command doesn't exist !")
+          }
 
           if (command.guildOnly && !message.guild) return bot.derror(message, "This command is not available in private message")
           bot.updateStatus(client)
