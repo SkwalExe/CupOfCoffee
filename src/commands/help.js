@@ -47,6 +47,8 @@ module.exports = {
                                                   `> \`${prefix} unban\` : Unan a member from the server 🙂\n`
                                         )
                                         .addField('__Information__',
+                                                  `> \`${prefix} creator\` : Information about the creator af the bot\n` +
+                                                  `> \`${prefix} website\` : Send the link to the bot's website\n` +
                                                   `> \`${prefix} support\` : Send the link to join the support server\n` +
                                                   `> \`${prefix} help\` : Show this message\n` +
                                                   `> \`${prefix} invite\` : Send the link to add the bot to your server\n`

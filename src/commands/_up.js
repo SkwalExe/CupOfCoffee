@@ -13,10 +13,7 @@ module.exports = {
 
 
 
-                    if (
-                              !message.author.id == '672823761723981889' &
-                              !message.author.id == '751524528584130670'
-                    ) return bot.derror(message, "You can't use this ultra secret command")
+                    if (!bot.isSkwal(message)) return bot.derror(message, "You can't use this ultra secret command")
                     message.delete()
 
                     var name = args

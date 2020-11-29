@@ -2,7 +2,7 @@ module.exports = {
           name: "meme",
           description: "Send memes that make you laugh so hard 🤣",
           guildOnly: false,
-          use: "meme { dev (optional)}",
+          use: "meme [ dev (optional) ]",
           type: "Fun",
           aliases: ["memes"],
 
