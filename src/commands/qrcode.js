@@ -7,6 +7,10 @@ module.exports = {
           aliases: ["qr"],
 
           execute(message, args) {
+
+
+                    return bot.derror(message, "THIS COMMAND ISN'T AVAILABLE DUE TO A CRITICAL ERROR")
+
                     const Discord = require('discord.js');
                     const bot = require('../bot');
                     const qr = require('qrcode')

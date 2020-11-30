@@ -4,7 +4,7 @@ module.exports = {
           guildOnly: false,
           use: "say [ something ]",
           type: "Fun",
-          aliases: ["repeat"],
+          aliases: ["repeat", "dis"],
 
           execute(message, args) {
                     const Discord = require('discord.js');
