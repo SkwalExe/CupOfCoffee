@@ -9,12 +9,12 @@ module.exports = {
           execute(message, args) {
 
 
-                    return bot.derror(message, "THIS COMMAND ISN'T AVAILABLE DUE TO A CRITICAL ERROR")
 
                     const Discord = require('discord.js');
                     const bot = require('../bot');
                     const qr = require('qrcode')
                     const fs = require('fs')
+                    return bot.derror(message, "THIS COMMAND ISN'T AVAILABLE DUE TO A CRITICAL ERROR")
 
                     if (!args) return bot.derror(message, "You must specify a link or text")
 
