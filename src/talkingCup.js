@@ -11,7 +11,7 @@ module.exports = {
                     function on(x, y) {
                               var next = false
                               x.forEach(x => {
-                                        if (x == result) { message.reply(bot.getRandomItemInArray(y)); next = true } else { next = false }
+                                        if (x == result) { message.reply(bot.getRandomItemInArray(y)); next = true } else { if(!next) next = false }
 
                               })
                               return next

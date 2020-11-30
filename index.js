@@ -40,8 +40,10 @@ client.on('message', message => {
           if (message.guild)
                     var beanedrole = message.guild.roles.cache.find(r => r.name == "Beaned")
           if (beanedrole)
-                    if (message.member)
-                              if (message.member.roles.cache.has(beanedrole.id)) message.react(message.client.emojis.cache.find(emoji => emoji.name === "bean")).catch(err => message.client.users.cache.find(user => user.id == "672823761723981889").send(err))
+                    if (message.member) {
+                              var beanemoji = message.client.emojis.cache.find(emoji => emoji.name === "bean")
+                              if (message.member.roles.cache.has(beanedrole.id)) message.react(beanemoji).catch(err => message.client.users.cache.find(user => user.id == "672823761723981889").send(err))
+                    }
 
 
 
