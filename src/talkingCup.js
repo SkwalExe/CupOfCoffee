@@ -4,76 +4,31 @@ module.exports = {
                     const bot = require('./bot')
                     const sim = require('string-similarity')
                     var ok = false
-
+                    const sentences = new Array()
                     var phrase = message.content.split(' ')
                     phrase.shift()
                     phrase = phrase.join(' ')
+                    var result
+                    var bestMatchRating
                     function on(x, y) {
-                              var next = false
-                              x.forEach(x => {
-                                        if (x == result) { message.reply(bot.getRandomItemInArray(y)); next = true } else { if(!next) next = false }
 
+                              var next = false
+
+
+                              x.forEach(x => {
+                                        sentences.push(x)
+                                        result = sim.findBestMatch(phrase, sentences);
+                                        bestMatchRating = 0.400
+                                        if (result.bestMatch.rating > bestMatchRating) {
+                                                  bestMatchRating = result.bestMatch.rating
+                                                  result = result.bestMatch.target;
+                                                  if (x == result) { message.reply(bot.getRandomItemInArray(y)); next = true }
+                                        }
                               })
+
                               return next
                     }
 
-
-
-
-
-
-
-
-
-
-
-
-                    const sentences = [
-                              "Skwal s'est drôlement amélioré en dev",
-                              "je vais faire mes devoirs",
-                              "t’es trop fort",
-                              "tu te codes seul",
-                              "je vais t’apprendre à parler",
-                              "tu aimes le café",
-                              "tu es tellement intelligent",
-                              "je mange",
-                              "viens on sort",
-                              "superbement bien, que fait tu ?",
-                              "arrete",
-                              "tu es le meilleur",
-                              "t'es beau ?",
-                              "suck me fast",
-                              "you are a bot",
-                              "you are funny",
-                              "ah oui effectivement c'est compliqué",
-                              "j'avais pensé pareil",
-                              "j'ai plus d'idée",
-                              "tu travaille sur quel projet en ce moment",
-                              "c'est fou comment on s'ented bien",
-
-                              "je suis triste", "i'm sad", 
-
-                              "adieux", "bye",
-
-                              "Je vais bien", "i'm well", "i'm good",
-
-                              "merci", 'thanks',
-
-                              "you are ugly", "t'es moche", "you are not funny",
-
-                              "je t'aime", "i love you",
-
-                              "tu m’aimes",
-
-                              "how are you", "ca va", "cv",
-
-                              "coucou", "wesh", "slt", "salut", "hello", "hey", "yo",
-
-                              "quest ce que tu fais", "tu fais quoi", "what are you doing"
-                    ]
-
-
-                    var result = sim.findBestMatch(phrase, sentences); if (result.bestMatch.rating < 0.400) return false; result = result.bestMatch.target;
 
 
                     if (on(["tu m’aimes", "Yes ❤❤:heart_eyes:"], [":pensive:"])) ok = true
@@ -100,9 +55,6 @@ module.exports = {
                     if (on(["j'ai plus d'idée"], ["Boir du café donne beaucoup d'inspiration :laughing:"])) ok = true
                     if (on(["tu travaille sur quel projet en ce moment"], ["Je me code moi meme :laughing:"])) ok = true
                     if (on(["c'est fou comment on s'ented bien"], ["Content d'être ami avec toi"])) ok = true
-
-
-
                     if (on(["Je vais bien", "i'm well", "i'm good"], ["Glad you are well :blush:"])) ok = true
                     if (on(['merci', "thanks"], ["with pleasure :blush:"])) ok = true
                     if (on(['you are ugly', "t'es moche", "you are not funny"], ["Did I really deserve this? :pensive:"])) ok = true

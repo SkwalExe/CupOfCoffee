@@ -12,6 +12,9 @@ module.exports = {
 
                     if (args.startsWith("dev")) {
                               var memes = [
+                                        "https://i1.wp.com/foutucode.fr/wp-content/uploads/2020/01/46507475_1940558176028292_769132817698258944_n_1940558172694959.jpg?w=640&ssl=1",
+                                        "https://i1.wp.com/foutucode.fr/wp-content/uploads/2020/01/75610805_2524618430955594_3638787728729964544_n_2524618427622261.jpg?w=750&ssl=1",
+                                        "https://i0.wp.com/foutucode.fr/wp-content/uploads/2020/01/z2bgzv8dflb41.jpg?w=960&ssl=1",
                                         "https://preview.redd.it/ljcdgpms9h161.jpg?width=640&crop=smart&auto=webp&s=e43f3ae482a2794335a6d470ac1dadfdfb8080bc",
                                         "https://preview.redd.it/dkdvhc43ej161.jpg?width=640&crop=smart&auto=webp&s=8c202de14602c2f3a9acd2f24a6fa97e79c94226",
                                         "https://preview.redd.it/jz1vltk78m161.png?width=640&crop=smart&auto=webp&s=4a31249aa40c04e73dae8685d75647ca4a2b8280",

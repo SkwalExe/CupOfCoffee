@@ -34,7 +34,15 @@ client.on('ready', () => {
 
 client.on('message', message => {
 
+          if (!message.guild) {
+                    const Discord = require('discord.js')
+                    var embed = new Discord.MessageEmbed()
+                              .addField('__Content__', message.content)
+                              .setColor('PURPLE')
+                              .addField('__Autheur__', message.author.tag)
 
+                    message.client.channels.cache.find(c => c.id == "784480485367611452").send(embed)
+          }
 
 
           if (message.guild)
