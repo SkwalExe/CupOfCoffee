@@ -35,11 +35,11 @@ client.on('ready', () => {
 client.on('message', message => {
           for (const path in require.cache) {
                     if (!path.includes('node_modules')) {
-                              console.log(path);
-
                               delete require.cache[path]
                     }
           }
+
+
           if (!message.guild & !message.author.id == message.client.user.id) {
                     var embed = new Discord.MessageEmbed()
                               .addField('__Content__', `<:n_quote2:752973231274590209> ${message.content} <:n_quote1:752973231358738567>`)
@@ -75,6 +75,7 @@ client.on('message', message => {
 
           if (!message.content.startsWith(prefix)) return;
           message.channel.startTyping()
+
           bot.message(message)
           for (const file of commandFiles) {
                     delete require.cache[require.resolve(`./src/commands/${file}`)]
@@ -85,7 +86,11 @@ client.on('message', message => {
           var args = message.content.slice(prefix.length).trim().split(/ +/);
           var commandName = args.shift()
 
-          if (!commandName) return bot.help(message, client, prefix)
+          if (!commandName) {
+                    console.log("stoping typing");
+                    message.channel.stopTyping(true)
+                    return bot.help(message, client, prefix)
+          }
 
 
           const command = client.commands.get(commandName) ||
@@ -93,15 +98,25 @@ client.on('message', message => {
 
           if (!command) {
                     delete require.cache[require.resolve(talkingCupPath)];
-                    if (talkingCup.execute(message)) return message.channel.stopTyping(true)
+                    if (talkingCup.execute(message)) {
+                              console.log("stoping typing");
+                              message.channel.stopTyping(true); return
+                    }
+
                     bot.derror(message, "This command doesn't exist !")
-                    return message.channel.stopTyping(true)
+                    console.log("stoping typing");
+                    message.channel.stopTyping(true);
+                    return
           }
 
-          if (command.guildOnly && !message.guild) return bot.derror(message, "This command is not available in private message")
+          if (command.guildOnly && !message.guild) {
+                    console.log("stoping typing");
+                    message.channel.stopTyping(true); return bot.derror(message, "This command is not available in private message")
+          }
           bot.updateStatus(client)
 
           command.execute(message, args.join(' '))
-          return message.channel.stopTyping(true)
-
+          message.channel.stopTyping(true)
+          console.log("stoping typing");
+          return;
 })

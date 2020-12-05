@@ -32,54 +32,52 @@ module.exports = {
 
 
 
-                    if (
 
 
 
-                              // are you an ia
-                              on(["are you an ia"], ["Yes I am"]) ||
+                    // are you an ia
+                    if (on(["are you an ia"], ["Yes I am"])) ok = true
 
-                              // hmmm
-                              on(["hmm"], ["Hmmmm <:hmmmm:774773803334631435>"]) ||
+                    // hmmm
+                    if (on(["hmm"], ["Hmmmm <:hmmmm:774773803334631435>"])) ok = true
 
-                              // insulte 
-                              on(["you suck"], ["Did I really deserve this? :pensive:", "..."]) ||
-
-
-                              // how are you
-                              on(["do you have a website", "whats your website"], ["my website is https://skwal.net"]) ||
+                    // insulte 
+                    if (on(["you suck"], ["Did I really deserve this? :pensive:", "..."])) ok = true
 
 
-                              // how are you
-                              on(["how are you"], ["I'm good... :blush:"]) ||
+                    // how are you
+                    if (on(["do you have a website", "whats your website"], ["my website is https://skwal.net"])) ok = true
 
 
-
-                              // i'm lauthing
-                              on(["i'm lauthing"], [":sob::joy:"]) ||
-
-
-                              // you are the best
-                              on(["you are the best"], ["Thanks you a lot :sob:", "No, you :blush:"]) ||
-
-
-                              // hey 
-                              on(["hey", "hello", "wsh", "slt", "wesh", "salut", "'sup", "bonjour"], ["Hey :blush:", "Hello :blush:"]) ||
-
-                              // what are you doing
-                              on(["what are you doing"], ["I'm talking to you :blush:"])
+                    // how are you
+                    if (on(["how are you"], ["I'm good... :blush:"])) ok = true
 
 
 
+                    // i'm lauthing
+                    if (on(["i'm lauthing"], [":sob::joy:"])) ok = true
+
+
+                    // you are the best
+                    if (on(["you are the best"], ["Thanks you a lot :sob:", "No, you :blush:"])) ok = true
+
+
+                    // hey 
+                    if (on(["hey", "hello", "wsh", "slt", "wesh", "salut", "'sup", "bonjour"], ["Hey :blush:", "Hello :blush:"])) ok = true
+
+                    // what are you doing
+                    if (on(["what are you doing"], ["I'm talking to you :blush:"])) ok = true
 
 
 
 
-                    ) ok = true
+
+
+
                     if (ok) {
-                              setTimeout(() => {
-                                        message.reply(ans);
-                              }, 2000); return true
+                              message.reply(ans);
+                              return true
+
                     } else { return false }
           }
 

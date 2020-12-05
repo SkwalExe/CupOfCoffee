@@ -11,7 +11,7 @@ module.exports = {
                     const bot = require('../bot');
                     const g = message.guild;
 
-                    if (!g.me.voice.connection) return derror(message, "No music playing")
+                    if (!g.me.voice.connection) return bot.derror(message, "No music playing")
                     bot.embed(message, "Music successfully stopped")
                     g.me.voice.connection.disconnect();
 
