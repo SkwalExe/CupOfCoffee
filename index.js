@@ -3,6 +3,7 @@ const fs = require('fs')
 const token = process.env.TOKEN
 const { prefix } = require('./src/config.json')
 const commandFolder = `./src/commands`
+const path = require('path')
 
 const client = new Discord.Client()
 client.commands = new Discord.Collection()
@@ -10,8 +11,7 @@ client.commands = new Discord.Collection()
 const commandFiles = fs.readdirSync(commandFolder).filter(file => file.endsWith('.js'))
 const bot = require('./src/bot')
 const talkingCup = require('./src/talkingCup');
-const { resourceUsage } = require('process');
-const talkingCupPath = './src/talkingCup'
+const talkingCupPath = './src/talkingCup.js'
 
 for (const file of commandFiles) {
           const command = require(`./src/commands/${file}`);
@@ -33,11 +33,16 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
+          for (const path in require.cache) {
+                    if (!path.includes('node_modules')) {
+                              console.log(path);
 
-          if (!message.guild) {
-                    const Discord = require('discord.js')
+                              delete require.cache[path]
+                    }
+          }
+          if (!message.guild & !message.author.id == message.client.user.id) {
                     var embed = new Discord.MessageEmbed()
-                              .addField('__Content__', message.content)
+                              .addField('__Content__', `<:n_quote2:752973231274590209> ${message.content} <:n_quote1:752973231358738567>`)
                               .setColor('PURPLE')
                               .addField('__Autheur__', message.author.tag)
 
@@ -69,7 +74,7 @@ client.on('message', message => {
 
 
           if (!message.content.startsWith(prefix)) return;
-
+          message.channel.startTyping()
           bot.message(message)
           for (const file of commandFiles) {
                     delete require.cache[require.resolve(`./src/commands/${file}`)]
@@ -87,14 +92,16 @@ client.on('message', message => {
                     client.commands.find(cmd => cmd.aliases && cmd.aliases.includes(commandName));
 
           if (!command) {
-                    if (talkingCup.execute(message)) return
-                    return bot.derror(message, "This command doesn't exist !")
+                    delete require.cache[require.resolve(talkingCupPath)];
+                    if (talkingCup.execute(message)) return message.channel.stopTyping(true)
+                    bot.derror(message, "This command doesn't exist !")
+                    return message.channel.stopTyping(true)
           }
 
           if (command.guildOnly && !message.guild) return bot.derror(message, "This command is not available in private message")
           bot.updateStatus(client)
 
           command.execute(message, args.join(' '))
-          return
+          return message.channel.stopTyping(true)
 
 })

@@ -13,8 +13,8 @@ module.exports = {
                     var embed = new Discord.MessageEmbed()
                               .setColor('PURPLE')
                               .setTitle('Our website')
-                              .setURL('http://skwal.net')
-                              .setDescription('[Page of the bot](http://skwal.net/CupOfCoffee) \nAdd Cup Of Coffee to your server and start giving it cool perks!');
+                              .setURL('https://skwal.net')
+                              .setDescription('[Page of the bot](https://skwal.net/CupOfCoffee) \nAdd Cup Of Coffee to your server and start giving it cool perks !');
 
                     message.channel.send(embed);
 

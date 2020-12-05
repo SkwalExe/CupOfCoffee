@@ -1,28 +1,29 @@
 module.exports = {
 
           execute(message) {
+                    var sentences = null
                     const bot = require('./bot')
                     const sim = require('string-similarity')
                     var ok = false
-                    const sentences = new Array()
+                    sentences = new Array()
                     var phrase = message.content.split(' ')
                     phrase.shift()
                     phrase = phrase.join(' ')
                     var result
-                    var bestMatchRating
+                    var bestMatchRating = 0.400
+                    var ans
                     function on(x, y) {
-
                               var next = false
-
-
                               x.forEach(x => {
                                         sentences.push(x)
                                         result = sim.findBestMatch(phrase, sentences);
-                                        bestMatchRating = 0.400
                                         if (result.bestMatch.rating > bestMatchRating) {
                                                   bestMatchRating = result.bestMatch.rating
                                                   result = result.bestMatch.target;
-                                                  if (x == result) { message.reply(bot.getRandomItemInArray(y)); next = true }
+                                                  if (x == result) {
+                                                            ans = bot.getRandomItemInArray(y);
+                                                            next = true
+                                                  }
                                         }
                               })
 
@@ -31,37 +32,42 @@ module.exports = {
 
 
 
-                    if (on(["tu m’aimes", "Yes ❤❤:heart_eyes:"], [":pensive:"])) ok = true
-                    if (on(["je suis triste", "i'm sad"], [":pensive:"])) ok = true
-                    if (on(["adieux", "bye"], ["I'm sad that I can't talk to you anymore :pensive:"])) ok = true
-                    if (on(["Skwal s'est drôlement amélioré en dev"], ["Oui :joy:"])) ok = true
-                    if (on(["je vais faire mes devoirs"], ["Bonne chance :D"])) ok = true
-                    if (on(["t’es trop fort"], ["Merci :sob::smiling_face_with_3_hearts:"])) ok = true
-                    if (on(["tu te codes seul"], ["Oui, je me programme moi meme :blush:"])) ok = true
-                    if (on(["je vais t’apprendre à parler"], ["Je suis une intelligence artificielle donc plus tu me parle plus je deviens intelligent :blush:"])) ok = true
-                    if (on(["tu aimes le café"], ["Le café est la meilleur boisson au monde :blush:"])) ok = true
-                    if (on(["tu es tellement intelligent"], ["Je suis une intelligence artificielle :blush:"])) ok = true
-                    if (on(["je mange"], ["Bon appetit :yum:"])) ok = true
-                    if (on(["viens on sort"], ["Ouiiii :smiling_face_with_3_hearts:"])) ok = true
-                    if (on(["superbement bien, que fait tu ?"], ["Je te parle :blush:"])) ok = true
-                    if (on(["arrete"], ["Désolé :pensive:"])) ok = true
-                    if (on(["tu es le meilleur"], ["Non toi :blush:"])) ok = true
-                    if (on(["t'es beau ?"], ["Ca c'est moi, https://zupimages.net/up/20/48/vqlk.png"])) ok = true
-                    if (on(["suck me fast"], ["..."])) ok = true
-                    if (on(["you are a bot"], ["No, i'm a cup :tea:"])) ok = true
-                    if (on(["you are funny"], [":joy::rofl:"])) ok = true
-                    if (on(["ah oui effectivement c'est compliqué"], ["En effet :sweat_smile:"])) ok = true
-                    if (on(["j'avais pensé pareil"], ["Nous sommes des âmes soeurs :laughing:"])) ok = true
-                    if (on(["j'ai plus d'idée"], ["Boir du café donne beaucoup d'inspiration :laughing:"])) ok = true
-                    if (on(["tu travaille sur quel projet en ce moment"], ["Je me code moi meme :laughing:"])) ok = true
-                    if (on(["c'est fou comment on s'ented bien"], ["Content d'être ami avec toi"])) ok = true
-                    if (on(["Je vais bien", "i'm well", "i'm good"], ["Glad you are well :blush:"])) ok = true
-                    if (on(['merci', "thanks"], ["with pleasure :blush:"])) ok = true
-                    if (on(['you are ugly', "t'es moche", "you are not funny"], ["Did I really deserve this? :pensive:"])) ok = true
-                    if (on(['i love you', "je t'aime"], ["Me to ❤❤:heart_eyes:"])) ok = true
-                    if (on(['ca va', 'cv', "how are you"], ["I'm good :blush:"])) ok = true
-                    if (on(['hey', 'yo', 'slt', 'salut', 'coucou', "hello"], ["Hey :blush:", "yo :blush:", "hello :blush:", "wesh :blush:"])) ok = true
-                    if (on(['what are you doing', "tu fais quoi", "quest ce que tu fais"], ["I'm talking to you :laughing:"])) ok = true
+                    if (
+
+
+
+                              // are you an ia
+                              on(["are you an ia"], ["Yes I am"]) ||
+
+                              // hmmm
+                              on(["hmm"], ["Hmmmm <:hmmmm:774773803334631435>"]) ||
+
+                              // insulte 
+                              on(["you suck"], ["Did I really deserve this? :pensive:", "..."]) ||
+
+
+                              // how are you
+                              on(["do you have a website", "whats your website"], ["my website is https://skwal.net"]) ||
+
+
+                              // how are you
+                              on(["how are you"], ["I'm good... :blush:"]) ||
+
+
+
+                              // i'm lauthing
+                              on(["i'm lauthing"], [":sob::joy:"]) ||
+
+
+                              // you are the best
+                              on(["you are the best"], ["Thanks you a lot :sob:", "No, you :blush:"]) ||
+
+
+                              // hey 
+                              on(["hey", "hello", "wsh", "slt", "wesh", "salut", "'sup", "bonjour"], ["Hey :blush:", "Hello :blush:"]) ||
+
+                              // what are you doing
+                              on(["what are you doing"], ["I'm talking to you :blush:"])
 
 
 
@@ -69,14 +75,12 @@ module.exports = {
 
 
 
-
-
-
-
-
-
-
-                    if (ok) { return true } else { return false }
+                    ) ok = true
+                    if (ok) {
+                              setTimeout(() => {
+                                        message.reply(ans);
+                              }, 2000); return true
+                    } else { return false }
           }
 
 

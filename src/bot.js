@@ -92,7 +92,7 @@ module.exports = {
           },
           message(message) {
 
-                    
+
                     if (message.guild) { var id = message.guild.id } else { var id = message.author.id }
                     console.log("\33[0m\33[34m[\33[93m MESSAGE\33[0m\33[34m ] : [ user: \33[93m" + message.author.tag + "\33[0m\33[34m ] → [ \33[93m" + message.content + "\33[0m\33[34m ] → [\33[93m server id : " + id + "\33[0m\33[34m ]")
 
@@ -106,5 +106,9 @@ module.exports = {
                     }
                     return array.random()
           },
+          removeCacheFrom(filePath) {
+                    const path = require('path')
+                    delete require.cache[path.resolve(filePath)];
+          }
 
 }
